@@ -1,0 +1,139 @@
+// users.component.scss
+:host {
+  display: fixed;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .header {
+    margin-left: 170px;
+    margin-top: 10px;
+    width: 680px; // ou qualquer outra largura que você preferir
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  #insert {
+    padding: 8px;
+    font-size: 8px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  .search-container {
+    gap: 10px;
+
+    select, input, button {
+      margin-left: 5px;
+      margin-right: 5px;
+      padding: 8px;
+      font-size: 8px;
+    }
+
+    select, input {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+
+      &:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  table {
+    margin-left: 170px;
+    margin-top: 10px;
+    width: 680px; // ou qualquer outra largura que você preferir
+    table-layout: fixed;
+    border-collapse: collapse;
+
+    .id-cell, .gender-cell, .status-cell {
+      width: 50px; // ou qualquer outra largura que você preferir
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+
+      #actions {
+        width: 110px;
+      }
+
+      select {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+        font-size: 16px;
+        transition: all 0.3s ease;
+
+        &:focus {
+          outline: none;
+          border-color: #007bff;
+          box-shadow: 0 0 5px rgba(0,123,255,.5);
+        }
+      }
+    }
+
+    th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #4CAF50;
+      color: white;
+    }
+  }
+
+  .pagination {
+    margin-left: 170px;
+    margin-top: 10px;
+    width: 680px; // ou qualquer outra largura que você preferir
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    button {
+      margin: 0 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

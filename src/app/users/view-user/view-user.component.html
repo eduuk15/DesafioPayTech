@@ -1,0 +1,33 @@
+<h2>Visualizar Usuário</h2>
+
+<form>
+  <label>
+    Nome:
+    <input name="name" disabled [(ngModel)]="data.user.name">
+  </label>
+
+  <label>
+    Email:
+    <input name="email" disabled [(ngModel)]="data.user.email">
+  </label>
+
+  <label>
+    Gênero:
+    <select name="gender" disabled [(ngModel)]="data.user.gender">
+      <option value="male">Masculino</option>
+      <option value="female">Feminino</option>
+    </select>
+  </label>
+
+  <label>
+    Ativo:
+    <select name="status" disabled [(ngModel)]="data.user.status">
+      <option value="active">Ativo</option>
+      <option value="inactive">Inativo</option>
+    </select>
+  </label>
+</form>
+
+<div class="button-container">
+  <button (click)="onNoClick()">Voltar</button>
+</div>

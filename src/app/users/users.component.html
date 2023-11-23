@@ -1,0 +1,59 @@
+<!-- users.component.html -->
+<app-sidebar></app-sidebar>
+<main>
+  <div class="header">
+    <button id="insert_btn" (click)="insertUser()">Inserir Novo Usuário</button>
+    <div class="search-container">
+      <select id="search_options" [(ngModel)]="searchOption">
+        <option value="email">E-mail</option>
+        <option value="nome">Nome</option>
+      </select>
+      <input id="search_value" type="text" [(ngModel)]="searchValue">
+      <button id="search_btn" [disabled]="!searchValue" (click)="onSearch()">Pesquisar</button>
+      <button (click)="clearFilters()">Limpar filtros</button>
+    </div>
+  </div>
+  <table>
+    <colgroup>
+      <col style="width: 70px"> <!-- largura para a coluna id -->
+      <col style="width: 110px"> <!-- largura para a coluna nome -->
+      <col style="width: 240px"> <!-- largura para a coluna email -->
+      <col style="width: 80px"> <!-- largura para a coluna genero -->
+      <col style="width: 60px"> <!-- largura para a coluna status -->
+      <col style="width: 120px"> <!-- largura para a coluna ações -->
+    </colgroup>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Gênero</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of usersOnCurrentPage">
+        <td id="id_cell">{{user.id}}</td>
+        <td id="name_cell">{{user.name}}</td>
+        <td id="email_cell">{{user.email}}</td>
+        <td id="gender_cell">{{ user.gender == 'male' ? 'Masculino' : 'Feminino' }}</td>
+        <td id="status_cell">{{ user.status == 'active' ? 'Ativo' : 'Inativo' }}</td>
+        <td>
+          <select id="actions" (change)="onActionSelect($event, user.id)">
+            <option value="" disabled selected>Ações</option>
+            <option value="view">Visualizar</option>
+            <option value="edit">Editar</option>
+            <option value="delete">Remover</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button *ngFor="let page of pages" (click)="goToPage(page)">
+      {{ page + 1 }}
+    </button>
+  </div>
+</main>
