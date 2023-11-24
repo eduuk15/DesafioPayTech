@@ -9,6 +9,7 @@ import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { UsersApiService } from '../services/users-api.service';
 import { ViewUserComponent } from './view-user/view-user.component';
 import { InsertUserComponent } from './insert-user/insert-user.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-users',
@@ -18,6 +19,7 @@ import { InsertUserComponent } from './insert-user/insert-user.component';
     SidebarComponent,
     FormsModule,
     MatDialogModule,
+    HttpClientModule,
     ViewUserComponent,
     EditUserComponent,
     DeleteUserComponent,
@@ -30,7 +32,7 @@ export class UsersComponent {
   searchValue = '';
   searchOption: 'email' | 'name' = 'email';
   users: User[] = [];
-  pageSize = 5;
+  pageSize = 10;
   currentPage = 0;
   pages: number[] = [];
 
@@ -64,20 +66,34 @@ export class UsersComponent {
     const action = target.value;
     switch (action) {
       case 'view':
+        target.value = '';
         const userView = this.users.find(user => user.id === userId);
-        const userToView = { ...userView };
+        const userToView = userView ? { ...userView } : {
+          id: 0,
+          name: '',
+          email: '',
+          gender: 'male',
+          status: 'active'
+        };
         this.dialog.open(ViewUserComponent, {
           data: { user: userToView },
-          width: '250px'
+          width: '600px'
         });
 
         break;
       case 'edit':
+        target.value = '';
         const user = this.users.find(user => user.id === userId);
-        const userToEdit = { ...user };
+        const userToEdit = user ? { ...user } : {
+          id: 0,
+          name: '',
+          email: '',
+          gender: 'male',
+          status: 'active'
+        };
         const editDialogRef = this.dialog.open(EditUserComponent, {
           data: { user: userToEdit },
-          width: '250px'
+          width: '600px'
         });
 
         editDialogRef.afterClosed().subscribe(user => {
@@ -90,9 +106,10 @@ export class UsersComponent {
 
         break;
       case 'delete':
+        target.value = '';
         const deleteDialogRef = this.dialog.open(DeleteUserComponent, {
           data: { userId: userId },
-          width: '250px'
+          width: '350px'
         });
 
         deleteDialogRef.afterClosed().subscribe(userId => {
@@ -116,11 +133,16 @@ export class UsersComponent {
 
   insertUser(): void {
     const insertDialogRef = this.dialog.open(InsertUserComponent, {
-      data: { user: {} },
-      width: '250px'
+      data: { user: {
+        id: 0,
+        name: '',
+        email: '',
+        gender: 'male',
+        status: 'active'
+      } },
+      width: '400px'
     })
     insertDialogRef.afterClosed().subscribe(result => {
-      console.log('result', result)
       if (result) {
         this.usersApiService.insertUser(result).subscribe(() => {
           this.clearFilters()

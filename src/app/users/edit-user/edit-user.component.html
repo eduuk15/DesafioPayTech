@@ -1,34 +1,36 @@
-<h2>Editar Usuário</h2>
+<div id="edit-user-modal">
+  <h2>Editar Usuário</h2>
 
-<form>
-  <label>
-    Nome:
-    <input name="name" [(ngModel)]="data.user.name">
-  </label>
+  <form #form="ngForm">
+    <label>
+      Nome:
+      <input name="name" [(ngModel)]="data.user.name" required>
+    </label>
 
-  <label>
-    Email:
-    <input name="email" [(ngModel)]="data.user.email">
-  </label>
+    <label>
+      Email:
+      <input type="email" name="email" [(ngModel)]="data.user.email" required email>
+    </label>
 
-  <label>
-    Gênero:
-    <select name="gender" [(ngModel)]="data.user.gender">
-      <option value="male">Masculino</option>
-      <option value="female">Feminino</option>
-    </select>
-  </label>
+    <label>
+      Gênero:
+      <select name="gender" [(ngModel)]="data.user.gender" required>
+        <option value="male">Masculino</option>
+        <option value="female">Feminino</option>
+      </select>
+    </label>
 
-  <label>
-    Ativo:
-    <select name="status" [(ngModel)]="data.user.status">
-      <option value="active">Ativo</option>
-      <option value="inactive">Inativo</option>
-    </select>
-  </label>
-</form>
+    <label>
+      Ativo:
+      <select name="status" [(ngModel)]="data.user.status" required>
+        <option value="active">Ativo</option>
+        <option value="inactive">Inativo</option>
+      </select>
+    </label>
+  </form>
 
-<div class="button-container">
-  <button (click)="onNoClick()">Voltar</button>
-  <button (click)="saveChanges()">Salvar</button>
+  <div class="button-container">
+    <button (click)="onNoClick()">Voltar</button>
+    <button (click)="saveChanges()" [disabled]="!form.valid">Salvar</button>
+  </div>
 </div>

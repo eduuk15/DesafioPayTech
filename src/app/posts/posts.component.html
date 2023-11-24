@@ -1,1 +1,55 @@
-<p>posts works!</p>
+<app-sidebar></app-sidebar>
+<main>
+  <div class="header">
+    <button id="insert_btn" (click)="insertPost()">Inserir Nova Postagem</button>
+    <div class="search-container">
+      <select id="search_options" [(ngModel)]="searchOption">
+        <option value="title">Título</option>
+        <option value="user_id">ID do usuário</option>
+      </select>
+      <input id="search_value" type="text" [(ngModel)]="searchValue">
+      <button id="search_btn" [disabled]="!searchValue" (click)="onSearch()">Pesquisar</button>
+      <button (click)="clearFilters()">Limpar filtros</button>
+    </div>
+  </div>
+  <table>
+    <colgroup>
+      <col style="width: 50px"> <!-- largura para a coluna id -->
+      <col style="width: 50px"> <!-- largura para a coluna usuário id -->
+      <col style="width: 150px"> <!-- largura para a coluna título -->
+      <col style="width: 310px"> <!-- largura para a coluna corpo -->
+      <col style="width: 120px"> <!-- largura para a coluna ações -->
+    </colgroup>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>ID do usuário</th>
+        <th>Título</th>
+        <th>Corpo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of postsOnCurrentPage">
+        <td id="id_cell">{{post.id}}</td>
+        <td id="user_id_cell">{{post.user_id}}</td>
+        <td id="title_cell">{{post.title}}</td>
+        <td id="body_cell">{{ post.body }}</td>
+        <td>
+          <select id="actions" (change)="onActionSelect($event, post.id)">
+            <option value="" disabled selected>Ações</option>
+            <option value="view">Visualizar</option>
+            <option value="edit">Editar</option>
+            <option value="delete">Remover</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button *ngFor="let page of pages" (click)="goToPage(page)">
+      {{ page + 1 }}
+    </button>
+  </div>
+</main>

@@ -1,0 +1,32 @@
+<div id="insert-post-modal">
+  <h2>Inserir Postagem</h2>
+
+  <form #form="ngForm">
+    <label>
+      Título:
+      <textarea name="title" [(ngModel)]="data.post.title" required></textarea>
+    </label>
+
+    <label>
+      Usuário:
+      <input name="user_name" type="text" [(ngModel)]="searchText" (input)="filterUsers()" required>
+      <input name="user_id" type="number" [(ngModel)]="userId" (input)="filterUsers()" required hidden>
+    </label>
+
+    <ul *ngIf="filteredUsers.length > 0">
+      <li *ngFor="let user of filteredUsers | slice:0:10" (click)="onUserSelected(user)">
+        {{user.name}}
+      </li>
+    </ul>
+
+    <label>
+      Corpo:
+      <textarea name="body" [(ngModel)]="data.post.body" required></textarea>
+    </label>
+  </form>
+
+  <div class="button-container">
+    <button (click)="onNoClick()">Voltar</button>
+    <button (click)="saveChanges()" [disabled]="!form.valid">Salvar</button>
+  </div>
+</div>

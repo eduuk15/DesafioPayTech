@@ -6,6 +6,7 @@ import { PostsComponent } from './posts/posts.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersApiService } from './services/users-api.service';
+import { PostsApiService } from './services/posts-api.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ import { UsersApiService } from './services/users-api.service';
     SidebarComponent,
     HttpClientModule
   ],
-  providers: [UsersApiService],
+  providers: [UsersApiService, PostsApiService, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

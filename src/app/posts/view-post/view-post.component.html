@@ -1,0 +1,19 @@
+<div id="view-post-modal">
+  <h2>Visualizar Postagem</h2>
+
+  <form>
+    <label>
+      Título:
+      <textarea name="title" disabled [(ngModel)]="data.post.title"></textarea>
+    </label>
+
+    <label>
+      Corpo:
+      <textarea name="body" disabled [(ngModel)]="data.post.body"></textarea>
+    </label>
+  </form>
+
+  <div class="button-container">
+    <button (click)="onNoClick()">Voltar</button>
+  </div>
+</div>

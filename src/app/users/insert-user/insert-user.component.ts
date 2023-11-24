@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Optional } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from '../user.model';
 import { FormsModule } from '@angular/forms';
@@ -12,10 +12,14 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './insert-user.component.scss'
 })
 export class InsertUserComponent {
+  data: { user: User };
+
   constructor(
-    public dialogRef: MatDialogRef<InsertUserComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { user: User }
-  ) { }
+    @Optional() public dialogRef: MatDialogRef<InsertUserComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) incomingData: { user: User }
+  ) {
+    this.data = incomingData ? incomingData : { user: { id: 0, name: '', email: '', gender: 'male', status: 'active' } };
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

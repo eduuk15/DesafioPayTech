@@ -13,7 +13,7 @@ export class UsersApiService {
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]> {
-    return this.http.get('https://gorest.co.in/public/v2/users', { headers: this.headers }).pipe(
+    return this.http.get('https://gorest.co.in/public/v2/users?per_page=50', { headers: this.headers }).pipe(
       map((response: any) => response)
     );
   }
